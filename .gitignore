@@ -1,0 +1,6 @@
+# Build output — regenerate with `python build/build.py`
+harness/subject.js
+harness/subject.rewritten.js
+
+# Node
+node_modules/
