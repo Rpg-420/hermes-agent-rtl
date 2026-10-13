@@ -1,6 +1,144 @@
 # فارسی / Persian RTL for Hermes Desktop
 
-راست‌چین، فونت وزیرمتن، و کلید `@` برای کیبورد فارسی — یک افزونه، بدون patches روی برنامه.
+<div dir="rtl" align="right">
+
+## فارسی
+
+افزونهٔ **پشتیبانی فارسی برای هرمس دسکتاپ**: بستهٔ زبان فارسی، جهت راست‌چین، فونت
+وزیرمتن، و اصلاح کلید `@` برای کیبورد فارسی. بدون patch کردن فایل‌های برنامه،
+بدون نیاز به build، بدون npm، و کاملاً آفلاین.
+
+### نصب
+
+۱. این ریپو را دانلود کنید (دکمهٔ **Code ▸ Download ZIP** بالای صفحه).
+
+۲. پوشهٔ `persian-rtl` را در مسیر افزونه‌های دسکتاپ کپی کنید:
+
+| سیستم | مسیر |
+|---|---|
+| ویندوز | `%LOCALAPPDATA%\hermes\desktop-plugins\` |
+| مک / لینوکس | `~/.hermes/desktop-plugins/` |
+
+مسیر کامل ویندوز معمولاً این است:
+
+```
+C:\Users\<نام‌کاربری>\AppData\Local\hermes\desktop-plugins\persian-rtl\plugin.js
+```
+
+در **PowerShell**:
+
+```powershell
+Copy-Item -Recurse persian-rtl "$env:LOCALAPPDATA\hermes\desktop-plugins\"
+```
+
+در **مک یا لینوکس**:
+
+```bash
+cp -r persian-rtl ~/.hermes/desktop-plugins/
+```
+
+۳. هرمس را باز کنید (اگر باز است، کاری نمی‌خواهد بکنید). پوشهٔ `desktop-plugins`
+را برنامه خودش زیر نظر دارد: افزونه در چند ثانیه لود می‌شود.
+
+اگر ظاهر نشد، <kbd>Ctrl</kbd>+<kbd>K</kbd> بزنید و **Reload desktop plugins**
+را انتخاب کنید.
+
+### فعال‌سازی زبان فارسی
+
+نصب افزونه زبان را عوض نمی‌کند — فقط `فارسی` را به لیست اضافه می‌کند:
+
+**Settings ▸ Appearance ▸ Language ▸ فارسی**
+
+پس از انتخاب آن، `<html lang="fa" dir="rtl">` ست می‌شود و رابط کاربری راست‌چین
+می‌شود.
+
+### چه چیزی اضافه می‌شود
+
+| قابلیت | توضیح |
+|---|---|
+| **زبان فارسی** | گزینهٔ `فارسی` به تنظیمات زبان اضافه می‌شود؛ ۸۸ رشتهٔ پرتکرار برنامه ترجمه شده. |
+| **فونت وزیرمتن** | نسخهٔ ۳۳.003، داخل خود فایل افزونه embed شده — بدون اینترنت و بدون CDN. |
+| **راست‌چین هوشمند** | پاراگراف فارسی راست‌چین می‌شود؛ پاسخ انگلیسی، بلوک کد و خروجی ترمینال چپ‌چین می‌مانند. |
+| **کلید @** | `Shift+2` به‌جای `٬`، کاراکتر `@` را تایپ می‌کند (تا وقتی composer فوکوس دارد). |
+| **کنترل‌ها** | آیکن کرهٔ زمین در نوار عنوان (با گذاشتن موس باز می‌شود)، صفحهٔ تنظیمات، <kbd>Alt</kbd>+<kbd>R</kbd>، و پالت فرمان. |
+
+### تنظیمات
+
+**Settings ▸ Plugins ▸ Persian RTL**
+
+| تنظیم | پیش‌فرض | کارش چیست |
+|---|---|---|
+| زبان رابط فارسی | روشن | بستهٔ `fa` را ثبت می‌کند. فقط فارسی را به لیست اضافه می‌کند، خودش زبان را عوض نمی‌کند. |
+| فونت وزیرمتن | روشن | فونت embed‌شده را اعمال می‌کند. دامنه: **متن گفتگو** یا **کل برنامه**. |
+| کلید @ فارسی | روشن | `Shift+2` را فقط داخل فیلدهای متنی به `@` تبدیل می‌کند. |
+| اندازه متن | ۱۰۰٪ | بازهٔ ۸۰ تا ۱۴۰٪. متن فارسی در همان ارتفاع خط، به کمی اندازه بیشتر نیاز دارد. |
+| اندازه فونت کد | ۱۲ پیکسل | بازهٔ ۱۰ تا ۱۸ پیکسل، مستقل از اندازهٔ متن تا بلوک کد حجیم نشود. |
+| چیپ نوار وضعیت | روشن | `فارسی` یا `EN` را در انتهای نوار وضعیت نشان می‌دهد؛ کلیک = تغییر حالت. |
+
+تنظیمات برای هر پروفایل جداگانه ذخیره می‌شود، زیر کلید
+`hermes.plugin.persian-rtl.*`.
+
+### نحوهٔ کار
+
+همه‌چیز روی **SDK رسمی افزونه‌ها** سوار است — `ctx.i18n.registerAppLocale` برای
+زبان، `ctx.registerSettingsPage` برای تنظیمات، و contribution areas برای
+عناصر رابط. هیچ فایلی از برنامه patch نمی‌شود، پس آپدیت هرمس نمی‌تواند آن را
+بشکند (برخلاف ابزارهایی که `app.asar` را دست‌کاری می‌کنند).
+
+سه نکتهٔ مهم دربارهٔ نحوهٔ کار:
+
+- **راست‌چین یک state رسمی برنامه است، نه یک hack.** فایل `styles.css` خود
+  هرمس از قبل قواعد `unicode-bidi: plaintext` و `text-align: start` و
+  ایزوله‌سازی کد را دارد؛ این افزونه همان قرارداد را گسترش می‌دهد، نه اینکه با
+  آن بجنگد.
+- **فونت با یک CSS author rule اعمال می‌شود، نه با نوشتن در config.** تنظیمات
+  «فونت گفتگو» در هرمس، کلید `desktop.font_family` را از طریق `saveHermesConfig`
+  می‌نویسد و مقدار زنده را در `$chatFontFamily` منتشر می‌کند — و هیچ‌کدام از
+  این دو در از دسترس افزونه نیست (`ctx.rest` فقط به `/api/plugins/<id>` محدود
+  است). پس افزونه یک rule با `!important` روی `<html>` تزریق می‌کند، چون تنها
+  چیزی که از استایل inline بردن `applyTheme` جلو می‌زند همان است.
+  **نتیجه:** تا وقتی فونت روشن است، تنظیمات «فونت گفتگو» مقدار پیش‌فرض پوسته را
+  نشان می‌دهد. خاموش کردن افزونه دقیقاً همان را برمی‌گرداند، چون هیچ چیزی
+  overwrite نشده — فقط یک rule موقت روی `<html>` بوده.
+- **بستهٔ زبان عمداً ناقص است.** ۸۸ رشته از ۵٬۶۵۵ رشتهٔ برنامه، روی
+  پرترافیک‌ترین بخش‌ها. `registerAppLocale` روی کاتالوگ موجود merge می‌کند، پس هر
+  کلید ترجمه‌نشده انگلیسی می‌ماند — هیچ برچسب خالی‌ای وجود ندارد.
+
+### تست و تأیید
+
+افزونه روی یک نمونهٔ در حال اجرای هرمس تست شد؛ از لاگ خود برنامه:
+
+```
+[persian] registered; fontBytes=80048
+[persian] painted; html[data-persian-rtl]=chat
+[persian] Vazirmatn available=true faces=["Vazirmatn 100 900 loaded"]
+[persian] calling registerAppLocale(fa, rtl=true)
+```
+
+یعنی ماژول لود می‌شود، `register()` اجرا می‌شود، فونت در دسترس است
+(`document.fonts.check('16px Vazirmatn')` مقدار `true` می‌دهد)، و بستهٔ زبان ثبت
+می‌شود.
+
+دو تست هم داخل ریپو هست:
+
+- `harness/atfix.test.mjs` — ۸ تست برای قرارداد کلید `@`: فقط روی یک کاراکتر
+  مشخص کار می‌کند، هیچ ترکیب Ctrl/Cmd/Alt را نمی‌بلعد، و خارج از فیلد متنی کاری
+  نمی‌کند.
+- `harness/i18n.test.mjs` — هر ۸۸ کلید فارسی را با کاتالوگ واقعی برنامه تطبیق
+  می‌دهد، تا یک اشتباه تایپی در مسیر کلید به‌جای اینکه بی‌صدا نادیده گرفته شود،
+  تست را fail کند.
+
+
+### حذف
+
+**Settings ▸ Plugins** و خاموش کردن افزونه. چیزی برای uninstall نیست و چیزی برای
+بازگردانی نمی‌خواهد — چون هیچ تنظیم یا فایل برنامه‌ای دست نخورده باقی مانده.
+
+</div>
+
+---
+
+# فارسی / Persian RTL for Hermes Desktop
 
 Persian (Farsi) support for **Hermes Desktop**: a UI language pack, RTL text
 direction, the Vazirmatn font, and the Persian-keyboard `@` fix. No app
@@ -8,8 +146,6 @@ patching, no build step, no npm install, no network access.
 
 [![MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![font: OFL 1.1](https://img.shields.io/badge/font-OFL--1.1-green.svg)](assets/fonts/OFL.txt)
-
----
 
 ## Install
 
@@ -31,6 +167,9 @@ cp -r persian-rtl ~/.hermes/desktop-plugins/
 The app watches that folder: the plugin loads within a few seconds and
 hot-reloads on every save. If it doesn't appear, press <kbd>Ctrl</kbd>+<kbd>K</kbd>
 → **Reload desktop plugins**.
+
+Then pick your language at **Settings ▸ Appearance ▸ Language ▸ فارسی** — the
+plugin adds فارسی to the picker but never changes your language on its own.
 
 To remove it, toggle it off in **Settings ▸ Plugins** — there is nothing to
 uninstall and nothing to restore.
@@ -96,6 +235,10 @@ already shipped broken once. The backtick guard is the interesting one: a single
 `` ` `` inside the CSS template literal closes it and pushes the following CSS
 into code position, which surfaces as a baffling `SyntaxError: Unexpected token
 '!'` pointing at the app's SDK bundle rather than at the plugin.
+
+`.gitattributes` pins `eol=lf` for the same reason: with `core.autocrlf=true` a
+Windows checkout would hand every Windows user a `plugin.js` with CRLF, which
+the runtime loader rejects outright.
 
 ## How it works
 
