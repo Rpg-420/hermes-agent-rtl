@@ -2,5 +2,19 @@
 harness/subject.js
 harness/subject.rewritten.js
 
+# The Persian language pack. build/fa_fragments/*.json IS the source — a human
+# edits those to fix a typo. fa.pack.json is the derived merge build.py injects.
+build/fa.pack.json
+build/fa_batches/
+
+# Scratch a translator uses while assembling a large fragment.
+build/_fa_parts/
+
+# One-time backup from build/split_fa_block.py.
+build/plugin.template.js.pre-split
+
+# Superseded — the pack lives in fa_fragments/ now, not inline here.
+build/fa_pack.py
+
 # Node
 node_modules/

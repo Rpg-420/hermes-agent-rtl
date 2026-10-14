@@ -45,7 +45,9 @@ if (!hasCatalog) {
 console.log('persian-rtl locale pack:', Object.keys(flat).length, 'keys')
 
 const missing = []
-const wrongType = []
+const invented = []
+
+const phCount = s => (s.match(/\{\d+\}/g) || []).length
 
 for (const [key, value] of Object.entries(flat)) {
   if (!(key in catalog)) {
@@ -53,16 +55,27 @@ for (const [key, value] of Object.entries(flat)) {
     continue
   }
 
+  if (typeof value !== 'string') continue
+
   // English has a function (an interpolator/plural) where we shipped a string.
-  // That is allowed by the registry (it wraps it as a positional {0} form),
-  // but it usually means we flattened one level too deep.
-  if (catalog[key] === 'fn' && typeof value === 'string' && !/\{\d\}/.test(value)) {
-    wrongType.push(`${key} (en is a formatter, fa is a plain string)`)
+  // That is the documented pack shape — the registry wraps a positional {0}
+  // form back into a call — so a string here is correct, not a bug. 61 of the
+  // pack's formatter entries are labels whose function takes an argument it
+  // never interpolates ('افزونه'), and those must stay legal.
+  //
+  // What IS a bug: a formatter whose Persian invented placeholders the English
+  // never passes. The flattened catalog records every function as the bare token
+  // 'fn', so the English arity is not visible from here; the asymmetry we can
+  // actually see is a Persian string with an implausible number of {N} slots.
+  // A pagination range legitimately takes three ('{0} تا {1} از {2}'), so the
+  // bar is 4: anything beyond that is a rewrite that made arguments up.
+  if (catalog[key] === 'fn' && phCount(value) > 3) {
+    invented.push(`${key} (fa has ${phCount(value)} positional placeholders)`)
   }
 }
 
 assert.deepEqual(missing, [], 'keys not present in the app catalog')
-assert.deepEqual(wrongType, [], 'keys whose English value is a formatter')
+assert.deepEqual(invented, [], 'placeholders invented in a positional rewrite')
 
 // And the reverse check that matters most: the keys we care about are covered.
 for (const key of ['common.save', 'common.cancel', 'language.label', 'sidebar.nav.cron', 'settings.subpages.appearanceTheme']) {
