@@ -104,9 +104,13 @@ const DEFAULTS = {
   codeSize: 12
 }
 
+/* Scope ids MUST match the CSS attribute values below (`data-persian-rtl='chat'`
+   and `='font'`). paint() writes p.scope straight onto the attribute, so an id
+   that no rule matches is a silently dead setting — which is exactly the bug
+   that shipped 'ui' here while the CSS only knew 'font'. */
 const SCOPES = [
   { id: 'chat', label: 'متن گفتگو' },
-  { id: 'ui', label: 'کل برنامه' }
+  { id: 'font', label: 'کل برنامه' }
 ]
 
 /* ── i18n: the Persian UI language pack ─────────────────────────────────────
