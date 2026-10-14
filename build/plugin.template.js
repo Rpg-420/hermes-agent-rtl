@@ -456,9 +456,15 @@ function PersianTool({ prefs, update }) {
   })
 }
 
+/* Single source of truth for the version. build.py stamps it into the built
+   plugin.js and the release zip, and CHANGELOG.md is written to match, so the
+   three never drift. Bump this, then `python build/release.py`. */
+const VERSION = '1.2.0'
+
 export default {
   id: ID,
   name: 'Persian RTL',
+  version: VERSION,
   description: 'Persian (Farsi) UI language, RTL text direction, Vazirmatn font, and the Persian-keyboard @ fix.',
   register(ctx) {
     const prefs = atom({ ...DEFAULTS, ...ctx.storage.get('prefs', {}) })

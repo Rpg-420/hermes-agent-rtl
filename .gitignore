@@ -16,6 +16,9 @@ build/plugin.template.js.pre-split
 # Superseded — the pack lives in fa_fragments/ now, not inline here.
 build/fa_pack.py
 
+# Release zips are build artifacts; attach them to a GitHub Release instead.
+dist/
+
 # Node
 node_modules/
 

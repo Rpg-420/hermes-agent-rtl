@@ -10,9 +10,25 @@
 
 ### نصب
 
-۱. این ریپو را دانلود کنید (دکمهٔ **Code ▸ Download ZIP** بالای صفحه).
+**سریع‌ترین راه — یک خط (پیشنهادی):**
 
-۲. پوشهٔ `persian-rtl` را در مسیر افزونه‌های دسکتاپ کپی کنید:
+در **PowerShell** (ویندوز):
+
+```powershell
+iwr -useb https://raw.githubusercontent.com/Rpg-420/hermes-agent-rtl/main/install.ps1 | iex
+```
+
+در **مک یا لینوکس**:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Rpg-420/hermes-agent-rtl/main/install.sh | bash
+```
+
+این اسکریپت‌ها کل پوشهٔ `persian-rtl` را دانلود و در مسیر افزونه‌ها می‌گذارند — **کاملاً آفلاین**، چون فونت داخل خود `plugin.js` embed شده و به هیچ CDN وابسته نیست.
+
+**راه دستی:** آخرین نسخهٔ آماده (`persian-rtl-<version>.zip`) را از صفحهٔ
+[Releases](../../releases) دانلود کنید و پوشهٔ `persian-rtl` را در یکی از این
+مسیرها کپی کنید:
 
 | سیستم | مسیر |
 |---|---|
@@ -37,11 +53,9 @@ Copy-Item -Recurse persian-rtl "$env:LOCALAPPDATA\hermes\desktop-plugins\"
 cp -r persian-rtl ~/.hermes/desktop-plugins/
 ```
 
-۳. هرمس را باز کنید (اگر باز است، کاری نمی‌خواهد بکنید). پوشهٔ `desktop-plugins`
-را برنامه خودش زیر نظر دارد: افزونه در چند ثانیه لود می‌شود.
-
-اگر ظاهر نشد، <kbd>Ctrl</kbd>+<kbd>K</kbd> بزنید و **Reload desktop plugins**
-را انتخاب کنید.
+پوشهٔ `desktop-plugins` را برنامه خودش زیر نظر دارد: افزونه در چند ثانیه لود
+می‌شود. اگر ظاهر نشد، <kbd>Ctrl</kbd>+<kbd>K</kbd> بزنید و **Reload desktop
+plugins** را انتخاب کنید.
 
 ### فعال‌سازی زبان فارسی
 
@@ -149,7 +163,26 @@ patching, no build step, no npm install, no network access.
 
 ## Install
 
-Copy `persian-rtl/` into your Hermes home's `desktop-plugins/`:
+**Fastest — one line (recommended):**
+
+Windows (PowerShell):
+
+```powershell
+iwr -useb https://raw.githubusercontent.com/Rpg-420/hermes-agent-rtl/main/install.ps1 | iex
+```
+
+macOS / Linux:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Rpg-420/hermes-agent-rtl/main/install.sh | bash
+```
+
+These download the whole `persian-rtl/` folder into your plugins directory —
+**fully offline**, because the font is embedded inside `plugin.js` and depends
+on no CDN.
+
+**Manual:** download the latest `persian-rtl-<version>.zip` from
+[Releases](../../releases) and copy the `persian-rtl` folder into:
 
 | Platform | Path |
 |---|---|
