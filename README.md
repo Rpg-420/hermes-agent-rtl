@@ -160,6 +160,7 @@ patching, no build step, no npm install, no network access.
 
 [![MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![font: OFL 1.1](https://img.shields.io/badge/font-OFL--1.1-green.svg)](assets/fonts/OFL.txt)
+[![release](https://img.shields.io/github/v/release/Rpg-420/hermes-agent-rtl?label=release)](../../releases)
 
 ## Install
 
@@ -267,9 +268,22 @@ assets/fonts/
 ```bash
 python build/merge_fa.py     # fragments → fa.pack.json, asserted (refuses if incomplete)
 python build/build.py        # build + assert the module loads and register() runs
-node harness/atfix.test.mjs
-node harness/i18n.test.mjs
+node harness/atfix.test.mjs  # the @-fix contract
+node harness/i18n.test.mjs   # every pack key resolves against the app catalog
+node harness/scope.test.mjs  # font-scope ids match the CSS that reads them
 ```
+
+### Releasing
+
+```bash
+python build/release.py      # build, run all tests, zip persian-rtl/, update CHANGELOG
+```
+
+Bump `VERSION` in `build/plugin.template.js` first and add its entry to
+`ENTRIES` in `build/release.py` — the script refuses to build if the version
+has no changelog entry, so the two never drift. It prints the exact
+`git tag` / `gh release create` commands to make it public, and leaves that
+decision to you.
 
 ### The language pack
 
