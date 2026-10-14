@@ -18,3 +18,6 @@ build/fa_pack.py
 
 # Node
 node_modules/
+
+# Scratch commit-message file — never commit this.
+.commit-msg.txt
